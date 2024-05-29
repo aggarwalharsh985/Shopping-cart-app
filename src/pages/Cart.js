@@ -6,6 +6,7 @@ import Cartitem from "../components/Cartitem";
 const Cart = () => {
 
     const {cart} = useSelector((state) => state);
+
     const [totalAmount , setTotalAmount] = useState(0);
 
     useEffect(() => {
@@ -17,35 +18,42 @@ const Cart = () => {
             {
                 cart.length > 0 ?
                 (
-                    <div>
-                        <div>
+                    <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-center">
+                        <div className="w-[100%] md:w-[60%] flex flex-col p-2">
                             {
                                 cart.map((item , index) => {
                                     return <Cartitem key={item.id} item = {item} itemIndex={index}/> 
                                 } )
                             }
                         </div>
-                        <div>
-                            <div>Your Cart</div>
-                            <div>Summary</div>
-                            <p>
-                                <span>Total Item : {cart.length}</span>
+                        <div className="w-[100%] md:w-[40%] mt-4 pl-3 mb-4 flex flex-col justify-between ">
+                            <div >
+                                <div className="font-semibold text-xl text-green-800 ">Your Cart</div>
+                                <div className="font-semibold text-5xl text-green-700 ">Summary</div>
+                                <p className="text-xl">
+                                    <span className="text-gray-700 font-semibold text-xl">Total Item : {cart.length}</span>
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col">
+                            <p className="text-xl font-bold">
+                                <span className="text-gray-700 font-semibold">
+                                    Total Amount : ${totalAmount}
+                                </span>
                             </p>
-                        </div>
-                        <div>
-                            <p>Total Amount : ${totalAmount}</p>
-                            <button>
+                            <button className="bg-green-700 hover:bg-purple-50 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold hover:text-green-700 p-3 text-xl w-60">
                                 Check  out now
                             </button>
                         </div>
+                        </div>    
                     </div>
                 ):
                 (
-                    <div>
-                        <h1>cart empty</h1>
+                    <div className="min-h-[80vh] flex flex-col items-center justify-center">
+                        <h1 className="text-gray-700 font-semibold text-xl mb-2">Cart Empty</h1>
                         <NavLink to="/">
-                            <button>
-                                shop now     
+                            <button className="uppercase bg-green-600 hover:bg-purple-50 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-semibold hover:text-green-700 p-3 px-10 tracking-wider">
+                                Shop Now     
                             </button>
                         </NavLink>
                     </div>
